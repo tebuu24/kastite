@@ -2,17 +2,14 @@
 #include <MFRC522.h>
 #include <Servo.h>
 
-// RFID Reader 1
 #define RST_PIN_1 9
 #define SS_PIN_1 10
 #define LED_PIN_1 5
 
-// RFID Reader 2
 #define RST_PIN_2 7
 #define SS_PIN_2 8
 #define LED_PIN_2 6
 
-// Servo Motor
 #define SERVO_PIN 3
 
 MFRC522 rfid1(SS_PIN_1, RST_PIN_1);
@@ -32,7 +29,7 @@ void setup() {
   rfid2.PCD_Init();
 
   myServo.attach(SERVO_PIN);
-  myServo.write(0); // Servo starts at initial position
+  myServo.write(0);
 
   pinMode(LED_PIN_1, OUTPUT);
   pinMode(LED_PIN_2, OUTPUT);
@@ -70,18 +67,18 @@ bool checkRFID(MFRC522 &rfid, int ssPin, int ledPin, const char *readerName) {
 
     if (uidMatch) {
       Serial.println("Access Granted");
-      digitalWrite(ledPin, HIGH); // Turn on corresponding LED
-      delay(2000);                // Keep LED on for 2 seconds
-      digitalWrite(ledPin, LOW);  // Turn off LED
-      rfid.PICC_HaltA();          // Halt the card
-      digitalWrite(ssPin, HIGH);  // Deactivate RFID reader
+      digitalWrite(ledPin, HIGH);
+      delay(2000);
+      digitalWrite(ledPin, LOW);
+      rfid.PICC_HaltA();
+      digitalWrite(ssPin, HIGH);
       return true;
     } else {
       Serial.println("Access Denied");
     }
   }
 
-  // Ensure RFID reader is deactivated
+  //RFID reader is deactivated
   digitalWrite(ssPin, HIGH);
   return false;
 }
@@ -102,11 +99,11 @@ byte checkKey(byte *uid, byte uidSize) {
 
 void toggleServoPosition() {
   if (isServoAtZero) {
-    myServo.write(90); // Rotate to open
+    myServo.write(90);
     isServoAtZero = false;
   } else {
-    myServo.write(0);  // Rotate to close
+    myServo.write(0);
     isServoAtZero = true;
   }
-  delay(2000); // Allow servo movement to complete
+  delay(2000);
 }
