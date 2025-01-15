@@ -3,7 +3,7 @@
 // Define pins for LDRs, LEDs, and servo
 const int ldr1Pin = A0; // First LDR connected to analog pin A0
 const int ldr2Pin = A1; // Second LDR connected to analog pin A1
-const int servoPin = 3; // Servo motor connected to pin 3 (PWM)
+const int servoPin = 6; // Servo motor connected to pin 3 (PWM)
 const int led1Pin = 9; // LED1 connected to pin 9 (PWM)
 const int led2Pin = 10; // LED2 connected to pin 10 (PWM)
 
