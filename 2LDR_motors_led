@@ -11,7 +11,7 @@ Servo myServo;
 const int ldr1Threshold = 600;
 const int ldr2Threshold = 600;
 
-int currentPosition = 90;  // Start at 90 degrees
+int currentPosition = 90;
 
 void setup() {
   myServo.attach(servoPin);
