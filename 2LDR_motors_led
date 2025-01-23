@@ -8,9 +8,6 @@ const int led2Pin = 10;
 
 Servo myServo;
 
-const int ldr1Threshold = 600;
-const int ldr2Threshold = 600;
-
 int currentPosition = 90;
 
 void setup() {
@@ -28,12 +25,15 @@ void loop() {
   int ldr1Value = analogRead(ldr1Pin);
   int ldr2Value = analogRead(ldr2Pin);
 
+  int ldr1Threshold = 650;
+  int ldr2Threshold = 650;
+
   Serial.print("LDR1 Value: ");
   Serial.print(ldr1Value);
   Serial.print(" | LDR2 Value: ");
   Serial.println(ldr2Value);
 
-  if (ldr1Value >= ldr1Threshold && currentPosition != 0) {
+  if (ldr1Value >= ldr1Threshold && currentPosition != 0 && ldr1Value > ldr2Value) {
     currentPosition = 0;
     myServo.write(currentPosition);
     analogWrite(led1Pin, 255);
@@ -41,7 +41,7 @@ void loop() {
     Serial.println("LDR1 triggered: Servo at 0 degrees and LED1 on.");
   }
 
-  if (ldr2Value >= ldr2Threshold && currentPosition != 90) {
+  if (ldr2Value >= ldr2Threshold && currentPosition != 90 && ldr2Value > ldr1Value) {
     currentPosition = 90;
     myServo.write(currentPosition);
     analogWrite(led2Pin, 255);
