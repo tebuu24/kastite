@@ -43,7 +43,7 @@ void loop() {
   Serial.print(" | LDR2 Vērtība: ");
   Serial.println(ldr2Value);
 
-  //Ja LDR1 pārsniedz slieksni un pašreizējā pozīcija nav 0, pārvieto servo par 90 grādiem
+  //Ja LDR1 pārsniedz slieksni un pašreizējā pozīcija nav 0, pārvieto servo par
   if (ldr1Value >= ldr1Threshold && currentPosition != 0 && ldr1Value > ldr2Value) {
     currentPosition = 0;
     myServo.write(currentPosition);
